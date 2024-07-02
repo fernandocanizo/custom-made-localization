@@ -38,7 +38,7 @@ export default function Index() {
         <li>{t1.saturday}</li>
       </ul>
 
-      <p>{t1.deep.translation.test.ok}</p>
+      <p>{t1.deep?.translation?.test?.ok}</p>
 
       <p>And from another object: {t2.thing}</p>
     </div>
