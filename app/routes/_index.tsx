@@ -1,9 +1,9 @@
-import type { SupportedTranslations } from "~/lib/translations";
-import type { MetaFunction } from "@remix-run/node";
+import type { LoaderFunctionArgs, MetaFunction } from "@remix-run/node";
 
 import { useLoaderData } from "@remix-run/react";
 
-import { translations } from "~/lib/translations";
+import { getBrowserLanguage } from "~/lib/getBrowserLanguage";
+import { getSupportedLocale } from "~/lib/translations";
 
 export const meta: MetaFunction = () => {
   return [
@@ -12,10 +12,9 @@ export const meta: MetaFunction = () => {
   ];
 };
 
-export const loader = async () => {
-  const localeIndex = Math.floor(Math.random() * translations.length)
-  const detectedLanguage = translations[localeIndex] as SupportedTranslations
-  const tCommon = await import(`../translations/${detectedLanguage}/common.ts`)
+export const loader = async ({ request }: LoaderFunctionArgs) => {
+  const locale = getSupportedLocale(getBrowserLanguage(request))
+  const tCommon = await import(`../translations/${locale}/common.ts`)
 
   return {
     t1: tCommon.everyWhere,
