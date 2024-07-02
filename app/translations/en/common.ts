@@ -16,3 +16,7 @@ export const everyWhere = {
     },
   },
 }
+
+export const another = {
+  thing: "You can dynamically import separated objects",
+}

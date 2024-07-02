@@ -16,3 +16,7 @@ export const everyWhere = {
     },
   },
 }
+
+export const another = {
+  thing: "Se pueden importar dinámicamente distintos objetos",
+}
