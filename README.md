@@ -21,6 +21,29 @@ Also, I've been having several issues:
 
 - I don't really like to write JSON files, I believe translations could perfectly live in JS/TS files and be imported leveraging Javascript module system, which avoid a great deal of library code to resolve and load translation files. Furthermore: being a file where code can be executed, things like pluralization could be solved there.
 
+- There's an `i18next` configuration parameter that allows to map regionalized localization strings to the proper language:
+```js
+// when `true`, consider variants as supported when the main language is.
+// E.g. 'en-US' will be valid if 'en' is in supportedLngs
+nonExplicitSupportedLngs: true,
+```
+
+However it doesn't work. I did an extensive research on the issue and it became too convoluted, so I ended up making a simpler and uglier solution on my other project: just made symbolic links for each possible _languageCode-regionalCode_ string for our allowed languages, so the `public/locales` folder looks like:
+```
+$ \ls -1 public/locales/
+en
+en_US
+# en_EVERY-POSSIBLE-REGIONAL-CODE...
+es
+es_AR
+# ...
+pt
+pt_BR
+# ...
+```
+
+Which is awful. Library should have a solution like the one implemented in this repo on `app/lib/simplifyLocale.ts` to get the proper language from a localization string with the regional code.
+
 
 ## Remix help
 
