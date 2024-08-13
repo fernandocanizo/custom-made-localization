@@ -17,9 +17,9 @@ Also, I've been having several issues:
 
 - I'm having issues with deep object access, I have correctly configured `keySeparator` to be a dot ("."), and still I cannot access something like `t("deep.object.translation")`.
 
-- If something bad happens with a single translation file, the whole translations break, even if they come from other files.
+- If something bad happens with a single translation file, the whole translations breaks, even if they come from other files.
 
-- I don't really like to write JSON files, I believe translations could perfectly live in JS/TS files and be imported leveraging Javascript module system, which avoid a great deal of library code to resolve and load translation files. Furthermore: being a file where code can be executed, things like pluralization could be solved there.
+- I don't really like to write JSON files, I believe translations could perfectly live in JS/TS files and be imported leveraging Javascript module system, which avoids a great deal of library code to resolve and load translation files. Furthermore: being a file where code can be executed, things like pluralization could be solved there.
 
 - There's an `i18next` configuration parameter that allows to map regionalized localization strings to the proper language:
 ```js
@@ -44,6 +44,10 @@ pt_BR
 
 Which is awful. Library should have a solution like the one implemented in this repo on `app/lib/simplifyLocale.ts` to get the proper language from a localization string with the regional code.
 
+- **Convoluted setup**
+  Setting up `remix-i18next` is not straightforward and requires a bunch of files plus messing up with `entry.client.tsx` and `entry.server.tsx` from Remix, which makes it hard to manage when you need to upgrade Remix.
+
+- (gotta go, but write about the non-working, at least for me, function to translate in the loader/action. There are separated ways to translate in the component (frontend) vs the loader/action (server), and I couldn't make the server one work, making me juggle on some occassions to get the translations in the component when it would have been more optimal to get them in the loader. Look for the name of the function to get the translator function in the loader, that' what I don't recall)
 
 ## Remix help
 
